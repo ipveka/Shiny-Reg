@@ -1,0 +1,148 @@
+---
+title: "Report"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+params:
+  a: NA
+  b: NA
+---
+
+```{r include=FALSE}
+
+library("devtools")
+install_github("ipveka/Proc.reg")
+library("Proc.reg")
+
+knitr::opts_chunk$set(
+	fig.align = "center",
+	message = FALSE,
+	comment = NA
+)
+
+df <- params$a
+lm <- params$b
+
+```
+
+<style type="text/css">
+p {line-height: 2.5em;}
+h1.title {
+  font-size: 46px;
+  color: Black;
+  text-align: center;
+}
+h1.subtitle {
+  font-size: 20px;
+  color: Black;
+  text-align: center;
+}
+h4.author {
+    font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+h4.date {
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+# Data
+
+## Content
+
+```{r}
+
+Proc.reg.content(df)
+
+```
+
+## Summary
+
+```{r}
+
+Proc.reg.summary(df)
+
+```
+
+# Model
+
+## Anova
+
+```{r}
+
+Proc.reg.anova(lm)
+
+```
+
+# Regression
+
+## Estimates
+
+```{r}
+
+Proc.reg.table(lm)
+
+```
+
+## Confidence Intervals
+
+```{r}
+
+Proc.reg.confint(lm)
+
+```
+
+# Testing
+
+## Homocedasticity: White & Breusch-Pagan Test
+
+White test
+
+```{r}
+
+# White test
+
+Proc.reg.white(lm)
+
+```
+
+Breusch-Pagan test
+
+```{r}
+
+# Breusch-Pagan test
+
+Proc.reg.pagan(lm)
+
+```
+
+## Autocorrelation: Durbin Test
+
+```{r}
+
+Proc.reg.durbin(lm)
+
+```
+
+## Linearity: Reset Test
+
+```{r}
+
+Proc.reg.reset(lm)
+
+```
+
+## Multicollinearity: Vif Analysis
+
+```{r}
+
+Proc.reg.vifs(lm)
+
+```

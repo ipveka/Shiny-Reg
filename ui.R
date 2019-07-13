@@ -37,6 +37,10 @@ sidebar <- dashboardSidebar(width = 230,
                               
                               hr(),
                               
+                              menuItem("Report", tabName = "report", icon = icon("cloud-download", lib = "glyphicon")),
+                              
+                              hr(),
+                              
                               menuItem("About", tabName = "about", icon = icon("user", lib = "glyphicon")),
                               
                               hr(),
@@ -211,6 +215,13 @@ body <- dashboardBody(
                                 plotOutput(outputId = "vifs", width = "90%", height = "700px")
                                 )))
             ),
+    
+    tabItem(tabName = "report",
+            fluidRow(box(width=12, 
+                         title = 'Download the report',
+                         downloadButton("report","Download Custom Report")
+            ))
+    ),
     
     ### TAB 8 = About
     tabItem(tabName = "about",
