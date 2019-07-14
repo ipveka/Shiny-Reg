@@ -9,8 +9,6 @@ library("lmtest")
 library("mctest")
 library("lm.beta")
 library("visreg")
-library("devtools")
-library("Proc.reg")
 library("caret")
 library("DT")
 
@@ -39,13 +37,10 @@ sidebar <- dashboardSidebar(width = 230,
                               
                               hr(),
                               
-                              menuItem("Report", tabName = "report", icon = icon("cloud-download", lib = "glyphicon")),
-                              
-                              hr(),
-                              
                               menuItem("About", tabName = "about", icon = icon("user", lib = "glyphicon")),
                               
                               hr(),
+                              
                               helpText("Developed by ", 
                                        a("Ignasi Pascual", href = "https://github.com/ipveka"), ".",
                                        style = "padding-left:1em; padding-right:1em;position:absolute;")
@@ -217,13 +212,6 @@ body <- dashboardBody(
                                 plotOutput(outputId = "vifs", width = "90%", height = "700px")
                                 )))
             ),
-    
-    tabItem(tabName = "report",
-            fluidRow(box(width=12, 
-                         title = 'Download the report',
-                         downloadButton("report","Download Custom Report")
-            ))
-    ),
     
     ### TAB 8 = About
     tabItem(tabName = "about",
