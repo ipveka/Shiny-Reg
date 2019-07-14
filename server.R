@@ -1,6 +1,4 @@
 
-# Servidor: Instalar mctest
-
 ##### Server
 
 library("RSQLite")
@@ -11,6 +9,8 @@ library("lmtest")
 library("mctest")
 library("lm.beta")
 library("visreg")
+library("devtools")
+library("Proc.reg")
 library("caret")
 library("DT")
 

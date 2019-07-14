@@ -12,8 +12,8 @@ params:
 
 ```{r include=FALSE}
 
-library("devtools")
-install_github("ipveka/Proc.reg")
+# library("devtools")
+# install_github("ipveka/Proc.reg")
 library("Proc.reg")
 
 knitr::opts_chunk$set(
