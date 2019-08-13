@@ -135,7 +135,7 @@ body <- dashboardBody(
     tabItem(tabName = "diagnostics",
             fluidRow(
               column(12,box(width = 12,title = "Anova",
-                            p("Anova test, used to analyze the differences among group means in a sample. (in this case, full dataset"),
+                            p("Anova test, used to analyze the differences among group means in a sample. (in this case, full dataset)",
                             solidHeader = FALSE, 
                             DT::dataTableOutput(outputId = "anova")))),
             fluidRow(
