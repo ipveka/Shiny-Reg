@@ -137,7 +137,7 @@ body <- dashboardBody(
               column(12,box(width = 12,title = "Anova",
                             p("Anova test, used to analyze the differences among group means in a sample. (in this case, full dataset)",
                             solidHeader = FALSE, 
-                            DT::dataTableOutput(outputId = "anova")))),
+                            DT::dataTableOutput(outputId = "anova"))))),
             fluidRow(
               column(6,box(width = 12,title = "Joint Significance",
                            p("Testing if all of the regression parameters are zero."),
