@@ -140,11 +140,11 @@ body <- dashboardBody(
                             DT::dataTableOutput(outputId = "anova"))))),
             fluidRow(
               column(6,box(width = 12,title = "Joint Significance",
-                           p("Testing if all of the regression parameters are zero."),
+                           p("Testing if all of the regression parameters are zero"),
                            solidHeader = FALSE, 
                            DT::dataTableOutput(outputId = "model"))),
               column(6,box(width = 12,title = "Determination",
-                           p("Proportion of the variance in the dependent variable that is predictable from the independent variable(s)."),
+                           p("Proportion of the variance in the dependent variable that is predictable from the independent variable(s)"),
                            solidHeader = FALSE, 
                            DT::dataTableOutput(outputId = "deter")))),
             fluidRow(
@@ -177,12 +177,12 @@ body <- dashboardBody(
                                 DT::dataTableOutput(outputId = "reg")))),
             fluidRow(column(6,
                             box(width = 12,title = "Confidence intervals: Parameter Estimate",
-                                p("Summary of parameters: Confidence intervals."),
+                                p("Summary of parameters: Confidence intervals"),
                                 solidHeader = FALSE,
                                 DT::dataTableOutput(outputId = "confint1"))),
                      column(6,
                             box(width = 12,title = "Confidence intervals: Standardized Parameter Estimate",
-                                p("Summary of standardized parameters: Confidence intervals."),
+                                p("Summary of standardized parameters: Confidence intervals"),
                                 solidHeader = FALSE,
                                 DT::dataTableOutput(outputId = "confint2"))))
     ),
