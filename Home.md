@@ -21,3 +21,18 @@ Note that the more computationally expensive iterated algorithms for parameter e
 
 The statistical relationship between the error terms and the regressors plays an important role in determining whether an estimation procedure has desirable sampling properties such as being unbiased and consistent. The arrangement, or probability distribution of the predictor variables x has a major influence on the precision of estimates of β. Sampling and design of experiments are highly developed subfields of statistics that provide guidance for collecting data in such a way to achieve a precise estimate of β.
 
+### Inference
+
+- White test (Halbert White, 1980) proposed a test which is vary similar to that by Breusch-Pagen. White test for Heteroskedasticity is general because it do not rely on the normality assumptions and it is also easy to implement. Because of the generality of White’s test, it may identify the specification bias too. Both White’s test and the Breusch-Pagan test are based on the residuals of the fitted model.
+
+- Breusch–Pagan test, developed in 1979 by Trevor Breusch and Adrian Pagan, and it is used to test for heteroskedasticity in a linear regression model. It was independently suggested with some extension by R. Dennis Cook and Sanford Weisberg in 1983. It tests whether the variance of the errors from a regression is dependent on the values of the independent variables.
+
+- The Durbin-Watson test has the null hypothesis that the autocorrelation of the disturbances is 0. It is possible to test against the alternative that it is greater than, not equal to, or less than 0, respectively. This can be specified by the alternative argument. Under the assumption of normally distributed disturbances, the null distribution of the Durbin-Watson statistic is the distribution of a linear combination of chi-squared variables. 
+
+- Ramsey Regression Equation Specification Error Test (RESET) test is a general specification test for the linear regression model. More specifically, it tests whether non-linear combinations of the fitted values help explain the response variable. The intuition behind the test is that if non-linear combinations of the explanatory variables have any power in explaining the response variable, the model is misspecified in the sense that the data generating process might be better approximated by a polynomial or another non-linear functional form.
+
+- A variance inflation factor(VIF) detects multicollinearity in regression analysis. Multicollinearity is when there’s correlation between predictors (i.e. independent variables) in a model; it’s presence can adversely affect your regression results. The VIF estimates how much the variance of a regression coefficient is inflated due to multicollinearity in the model.
+
+### Source(s)
+
+- https://www.wikipedia.org/
