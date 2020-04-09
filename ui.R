@@ -1,9 +1,12 @@
 
 ##### User Interface
 
-library("RSQLite")
-library("shiny")
-library("shinydashboard")
+library("shinydashboard") # Shiny dashboard
+library("shinycssloaders") # Animated CSS loader
+library("shinyalert") # Shiny Alerts
+library("shinyWidgets") # Shiny Widgets
+library("shinytest") # For testing 
+library("shinyjs") # JavaScript
 library("markdown")
 library("lmtest")
 library("mctest")
@@ -19,30 +22,23 @@ header <- dashboardHeader(title = "ShinyReg")
 ### SideBar:
 
 sidebar <- dashboardSidebar(width = 230,
-                            
-                            hr(),
-                            
+                          
                             sidebarMenu(
+                              
                               menuItem("Home", tabName = "home", icon = icon("home", lib = "glyphicon")),
                               menuItem("Data", tabName = "data", icon = icon("cloud-upload", lib = "glyphicon")),
                               menuItem("Summary", tabName = "summary", icon = icon("stats", lib = "glyphicon")),
-                              
-                              hr(),
-                              
                               menuItem("Regression", tabName = "regression", icon = icon("cog", lib = "glyphicon")),
                               menuItem("Diagnostics", tabName = "diagnostics", icon = icon("cog", lib = "glyphicon")),
                               menuItem("Parameters", tabName = "parameters", icon = icon("cog", lib = "glyphicon")),
                               menuItem("Graphics", tabName = "graphics", icon = icon("cog", lib = "glyphicon")),
                               menuItem("Inference", tabName = "inference", icon = icon("cog", lib = "glyphicon")),
-                              
-                              hr(),
-                              
                               menuItem("About", tabName = "about", icon = icon("user", lib = "glyphicon")),
                               
                               hr(),
                               
                               helpText("Developed by ", 
-                                       a("Ignasi Pascual", href = "https://github.com/ipveka"), ".",
+                                       a("Ignasi Pascual", href = "https://github.com/ipveka"),
                                        style = "padding-left:1em; padding-right:1em;position:absolute;")
                             )
 )
@@ -50,6 +46,11 @@ sidebar <- dashboardSidebar(width = 230,
 ### Dashboard:
 
 body <- dashboardBody(
+  
+  # CSS 
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+  ),
   
   # Tabintes:
   tabItems(
@@ -72,7 +73,7 @@ body <- dashboardBody(
                                             }
                                             ')))))
             
-                  ),
+    ),
     
     ### TAB 1 = Data:
     tabItem(tabName = "data",
@@ -116,9 +117,9 @@ body <- dashboardBody(
                             DT::dataTableOutput("summary"))),
               column(8, box(width = 16,title = "Graphics",
                             solidHeader = FALSE,
-                            plotOutput('plot1'),
-                            plotOutput('plot2'),
-                            plotOutput('plot3'))))
+                            withSpinner(plotOutput('plot1')),
+                            withSpinner(plotOutput('plot2')),
+                            withSpinner(plotOutput('plot3')))))
     ),
     
     ### TAB 3 = Regression:
@@ -136,8 +137,8 @@ body <- dashboardBody(
             fluidRow(
               column(12,box(width = 12,title = "Anova",
                             p("Anova test, used to analyze the differences among group means in a sample. (in this case, full dataset)",
-                            solidHeader = FALSE, 
-                            DT::dataTableOutput(outputId = "anova"))))),
+                              solidHeader = FALSE, 
+                              DT::dataTableOutput(outputId = "anova"))))),
             fluidRow(
               column(6,box(width = 12,title = "Joint Significance",
                            p("Testing if all of the regression parameters are zero"),
@@ -151,21 +152,21 @@ body <- dashboardBody(
               column(6,box(width = 12,
                            title = "Residuals vs Fitted",
                            solidHeader = TRUE, status = "primary",
-                           plotOutput(outputId = "reg1"))),
+                           withSpinner(plotOutput(outputId = "reg1")))),
               column(6,box(width = 12,
                            title = "Normal Q-Q",
                            solidHeader = TRUE, status ="primary",
-                           plotOutput(outputId = "reg2")))
+                           withSpinner(plotOutput(outputId = "reg2"))))
             ),
             fluidRow(
               column(6,box(width = 12,
                            title = "Cook's distance",
                            solidHeader = TRUE, status = "primary",
-                           plotOutput(outputId = "reg4"))),
+                           withSpinner(plotOutput(outputId = "reg4")))),
               column(6,box(width = 12,
                            title = "Residuals vs Leverage",
                            solidHeader = TRUE, status = "primary",
-                           plotOutput(outputId = "reg5"))))
+                           withSpinner(plotOutput(outputId = "reg5")))))
     ),
     
     ### TAB  5 = Parameters
@@ -194,9 +195,9 @@ body <- dashboardBody(
             fluidRow(box(width=12,
                          h6("Plotting the relation between variables", align = "center"),
                          column(12, align="center", 
-                                         mainPanel(plotOutput(outputId = "visreg"),
-                                                   width = "100%", height = "600px"
-                                                   ))))
+                                mainPanel(plotOutput(outputId = "visreg"),
+                                          width = "100%", height = "600px"
+                                ))))
     ),
     
     ### TAB 7 = Inference:
@@ -223,9 +224,9 @@ body <- dashboardBody(
                             box(width = 12, title = "Multicollinearity",
                                 p("Testing the multicollinearity with VIFs"),                    
                                 solidHeader = FALSE,
-                                plotOutput(outputId = "vifs", width = "90%", height = "700px")
-                                )))
-            ),
+                                withSpinner(plotOutput(outputId = "vifs", width = "90%", height = "700px"))
+                            )))
+    ),
     
     ### TAB 8 = About
     tabItem(tabName = "about",
@@ -234,8 +235,9 @@ body <- dashboardBody(
                   shiny::includeMarkdown("README.md"))
             )
     )
-                  )
-                  )
+  )
+)
 
-ui <- dashboardPage(header, sidebar, body, skin="purple")
+ui <- dashboardPage(header, sidebar, body)
 
+#---

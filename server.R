@@ -1,9 +1,12 @@
 
 ##### Server
 
-library("RSQLite")
-library("shiny")
-library("shinydashboard")
+library("shinydashboard") # Shiny dashboard
+library("shinycssloaders") # Animated CSS loader
+library("shinyalert") # Shiny Alerts
+library("shinyWidgets") # Shiny Widgets
+library("shinytest") # For testing 
+library("shinyjs") # JavaScript
 library("markdown")
 library("lmtest")
 library("mctest")
@@ -17,6 +20,7 @@ server <- function(input, output) {
   ### Funcions i crides:
   
   # TaulaContinguts(x)
+  
   TaulaContinguts <- function(x) {
     data.frame(row.names = 1:length(x),
                Name = substr(names(x), 1, 19),
@@ -25,6 +29,7 @@ server <- function(input, output) {
   }
   
   # Colors()
+  
   Colors <- function(nv=4){
     if(require(RColorBrewer)){
       cols=brewer.pal(nv,"Pastel1")
@@ -36,6 +41,7 @@ server <- function(input, output) {
   }
   
   # Sdbeta()
+  
   Sdbeta <- function(lm){
     b <- summary(lm)$coef[-1, 1]
     beta <- c()
@@ -48,7 +54,8 @@ server <- function(input, output) {
     return(beta)
   }
   
-  ### Data
+  ### Data: ----------------------------------------------------------------
+  
   myData <- reactive({
     inFile <- input$file1
     if (is.null(inFile)) return(NULL)
@@ -62,11 +69,13 @@ server <- function(input, output) {
     options = list(scrollX = TRUE,pageLength = 15)
   )
   
-  ### Summary of data:
+  ### Summary of data: ----------------------------------------------------------------
+  
   output$select <- renderUI({
     df <- myData()
     selectInput("variable","Variable:",names(df))
   })
+  
   output$toc <- renderDataTable({
     a <- TaulaContinguts(myData())
     datatable(a, rownames=FALSE, 
@@ -74,6 +83,7 @@ server <- function(input, output) {
                 list(className = "dt-center", targets = "_all")
               )))
   })
+  
   output$summary <- renderDataTable({
     options(digits = 3)
     df <- myData()
@@ -88,7 +98,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### Summary plots:
+  ### Summary plots: ----------------------------------------------------------------
+  
   output$plot1 <- renderPlot({
     df <- myData()
     df <- df[,input$variable]
@@ -99,6 +110,7 @@ server <- function(input, output) {
       plot(df,col="gray16",type="p",ylab=input$variable,xlab="Index")
     }
   })
+  
   output$plot2 <- renderPlot({
     df <- myData()
     df <- df[,input$variable]
@@ -106,6 +118,7 @@ server <- function(input, output) {
       plot(df,col="gray16",type="p",ylab=input$variable,xlab="Index")
     }
   })
+  
   output$plot3 <- renderPlot({
     df <- myData()
     df <- df[,input$variable]
@@ -114,16 +127,20 @@ server <- function(input, output) {
     } 
   })
   
-  ### Regression:
+  ### Regression: ----------------------------------------------------------------
+  
   output$model_select<-renderUI({
     selectInput("modelselect","Select Algo",choices = c("Ordinary Least Square"="reg"))
   })
+  
   output$var1_select<-renderUI({
     selectInput("ind_var_select","Select Independent Var", choices =as.list(names(myData())),multiple = FALSE)
   })
+  
   output$rest_var_select<-renderUI({
     checkboxGroupInput("other_var_select","Select Dependent Var",choices =as.list(names(myData())))
   })
+  
   output$other_val_show<-renderPrint({
     input$other_var_select
     input$ind_var_select
@@ -134,6 +151,7 @@ server <- function(input, output) {
     reg <- lm(as.formula(form),data=f)
     print(summary(reg))
   })
+  
   myReg <- reactive({
     input$other_var_select
     input$ind_var_select
@@ -145,9 +163,10 @@ server <- function(input, output) {
     reg
   })
   
-  # Diagnostics
+  ### Diagnostics: ----------------------------------------------------------------
   
-  ### ANOVA
+  ### Anova: ----------------------------------------------------------------
+  
   output$anova <- renderDataTable({
     a <- myReg()
     a <- anova(a)
@@ -166,7 +185,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### REG table:
+  ### Reg table: ----------------------------------------------------------------
+  
   output$reg <- renderDataTable({
     a1 <- myReg()
     a <- summary(a1)
@@ -186,7 +206,7 @@ server <- function(input, output) {
               )))
   })
   
-  ### CONF intervals:
+  ### Conf intervals: ----------------------------------------------------------------
   
   output$confint1 <- renderDataTable({
     a1 <- myReg()
@@ -206,7 +226,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### INFER table:
+  ### Infer table: ----------------------------------------------------------------
+  
   output$model <- renderDataTable({
     a <- myReg()
     a <- summary(a)
@@ -224,7 +245,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### DETER table:
+  ### Deter table: ----------------------------------------------------------------
+  
   output$deter <- renderDataTable({
     a <- myReg()
     a <- summary(a)
@@ -240,7 +262,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### RESET table:
+  ### Reset table: ----------------------------------------------------------------
+  
   output$reset <- renderDataTable({
     a <- myReg()
     m <- a
@@ -264,7 +287,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### WHITE table:
+  ### White table: ----------------------------------------------------------------
+  
   output$white <- renderDataTable({
     a <- myReg()
     data <- myData()
@@ -281,7 +305,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### PAGAN table:
+  ### Pagan table: ----------------------------------------------------------------
+  
   output$pagan <- renderDataTable({
     a <- myReg()
     b <- bptest(a)
@@ -295,7 +320,8 @@ server <- function(input, output) {
               )))
   })
   
-  ### DURBIN table:
+  ### Durbin table: ----------------------------------------------------------------
+  
   output$durbin <- renderDataTable({
     a <- myReg()
     b <- dwtest(a)
@@ -309,17 +335,20 @@ server <- function(input, output) {
               )))
   })
   
-  ### GRAPHICS: 
+  ### Graphics: ----------------------------------------------------------------
+  
   output$var_plot<-renderUI({
     selectInput("var_plot","Select Dependent Var",choices =as.list(paste0(input$other_var_select)))
   })
+  
   output$visreg <- renderPlot({
     a <- myReg()
     b <- input$var_plot
     visreg(a, b, gg=TRUE)
   })
   
-  ### VIF graphics: 
+  ### VIF graphics: ----------------------------------------------------------------
+  
   output$vifs <- renderPlot({
     a <- myReg()
     ids <- unlist(lapply(a$model, is.numeric)) 
@@ -329,7 +358,8 @@ server <- function(input, output) {
     b <- mc.plot(x, y)
   })
   
-  ### PLOTS
+  ### Plots: ----------------------------------------------------------------
+  
   output$reg1 <- renderPlot({
     a <- myReg()
     plot(a,which=1,col="gray16")
