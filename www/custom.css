@@ -1,0 +1,153 @@
+
+/*---*/
+
+/* White and blue theme */
+/* Author: Ignasi Pascual Vilaseca */
+/* Date: 14/09/2019 */
+
+/* header title font */
+.main-header .logo {
+font-family: "Georgia", Times, "Times New Roman", serif;
+font-weight: bold;
+font-size: 20px;
+}
+
+/* background color of header (logo part) */
+.skin-blue .main-header .logo {
+background-color: #38598a;
+color: #fff;
+border-bottom: 0 solid transparent;
+}
+        
+/* change the background color of header (logo part) when mouse hover */
+.skin-blue .main-header .logo:hover {
+background-color: #38598a;
+}
+        
+
+/* background color for remaining part of the header */
+.skin-blue .main-header .navbar {
+background-color: #38598a;
+} 
+                              
+/* main sidebar */
+.skin-blue .main-sidebar {
+background-color: #fff;
+}
+
+/* active sidebar menu item */
+.skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
+background-color: #fff;
+color: #38598a;
+}
+
+/* active selected tab in the sidebarmenu */
+.skin-blue .sidebar-menu > li.active > a,
+.skin-blue .sidebar-menu > li:hover > a {
+  border-left-color: #6897BB;
+}
+
+/* sidebar menuitems */
+.skin-blue .main-sidebar .sidebar .sidebar-menu a{
+background-color: #fff;
+color: #38598a;
+}
+
+/* sidebar menuitems when mouse hover */
+.skin-blue .main-sidebar .sidebar .sidebar-menu a:hover{
+background-color: #38598a;
+border-bottom-color:#222d32;
+                    border-left-color:#222d32;
+                    border-right-color:#222d32;
+                    border-top-color:#222d32;
+color: white;
+}
+                              
+/* sidebar toggle button */           
+.skin-blue .main-header .navbar .sidebar-toggle:hover{
+background-color: #fff;
+}
+
+.info-box-content {
+	display: block; 
+	text-align: center; 
+	padding-top: 0px; 
+	padding-bottom: 0px; 
+	margin-left: 0px;
+	font-size: 10px;
+}
+
+.info-box {
+	min-height: 45px;
+	background:#222d32;
+	color:#eff4f8;
+} 
+
+.info-box-icon {display:none; height: 0px; line-height: 0px;} 
+.info-box-content .info-box-text {
+font-size:11px;
+}
+
+.info-box-content .info-box-number{
+font-size:12px;
+}
+
+.box.box-solid.box-primary>.box-header {
+  color:#fff;
+  background:#38598a
+} 
+
+h6 {
+    border-bottom: 1px solid #ccc; /* This is the line replacing the hr*/
+    margin-bottom: 10px; /* This is the space below the line */
+    padding-bottom: 3px; /* This is the space between the heading text and the line */
+}
+
+.box.box-solid.box-primary>.box-header>.box-title {
+font-family: "Calibri Light";
+font-size: 12px;
+font-weight: bold;
+text-align: center;
+}
+					
+/*outer line and box font styling*/
+.box.box-solid.box-primary{
+                    border-bottom-color:#222d32;
+                    border-left-color:#222d32;
+                    border-right-color:#222d32;
+                    border-top-color:#222d32;
+                    /*background:#222d32;*/
+		    /*color:#eff4f8;*/
+		    font-family: "Calibri Light";
+		    font-size: 12px;	
+		    text-align: center;
+                    }
+					
+/*progression bar*/
+.shiny-notification {
+	position: fixed;
+	top: 90% ; 
+	left:1%; 
+	height: 50px; 
+	width: 225px;
+		    border-bottom-color:#b3cbdd;
+                    border-left-color:#b3cbdd;
+                    border-right-color:#b3cbdd;
+                    border-top-color:#b3cbdd;
+	background:#eff4f8;
+	font-family: "Calibri Light";
+	color:#141e25;
+	font-size: 14px;
+	text-align: center;
+	
+}
+
+.progress-bar {
+	background-color: #6897BB;
+}
+
+/*Box color*/
+.box.box-solid.box-primary>.box-header {
+  color:#fff;
+  background:#38598a
+}

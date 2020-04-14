@@ -58,7 +58,7 @@ server <- function(input, output) {
   
   myData <- reactive({
     inFile <- input$file1
-    if (is.null(inFile)) return(NULL)
+    if (is.null(inFile)) return(iris)
     data <- read.csv(inFile$datapath, header = input$header,
                      sep = input$sep,
                      quote = input$quote)

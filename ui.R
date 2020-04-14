@@ -39,7 +39,8 @@ sidebar <- dashboardSidebar(width = 230,
                               
                               helpText("Developed by ", 
                                        a("Ignasi Pascual", href = "https://github.com/ipveka"),
-                                       style = "padding-left:1em; padding-right:1em;position:absolute;")
+                                       align = "center")
+                              
                             )
 )
 
