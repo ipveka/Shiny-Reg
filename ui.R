@@ -1,12 +1,15 @@
 
 ##### User Interface
 
+# Encoding: UTF-8
+
 library("shinydashboard") # Shiny dashboard
 library("shinycssloaders") # Animated CSS loader
 library("shinyalert") # Shiny Alerts
 library("shinyWidgets") # Shiny Widgets
 library("shinytest") # For testing 
 library("shinyjs") # JavaScript
+library("dplyr") # Dplyr
 library("markdown")
 library("lmtest")
 library("mctest")
@@ -220,13 +223,7 @@ body <- dashboardBody(
                             box(width = 12,title = "Linearity: Reset",
                                 p("Testing the linearity of the model"),
                                 solidHeader = FALSE, 
-                                DT::dataTableOutput(outputId = "reset")))),
-            fluidRow(column(12, align="center", 
-                            box(width = 12, title = "Multicollinearity",
-                                p("Testing the multicollinearity with VIFs"),                    
-                                solidHeader = FALSE,
-                                withSpinner(plotOutput(outputId = "vifs", width = "90%", height = "700px"))
-                            )))
+                                DT::dataTableOutput(outputId = "reset"))))
     ),
     
     ### TAB 8 = About

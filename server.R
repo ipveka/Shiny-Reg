@@ -1,12 +1,15 @@
 
 ##### Server
 
+# Encoding: UTF-8
+
 library("shinydashboard") # Shiny dashboard
 library("shinycssloaders") # Animated CSS loader
 library("shinyalert") # Shiny Alerts
 library("shinyWidgets") # Shiny Widgets
 library("shinytest") # For testing 
 library("shinyjs") # JavaScript
+library("dplyr") # Dplyr
 library("markdown")
 library("lmtest")
 library("mctest")
@@ -345,17 +348,6 @@ server <- function(input, output) {
     a <- myReg()
     b <- input$var_plot
     visreg(a, b, gg=TRUE)
-  })
-  
-  ### VIF graphics: ----------------------------------------------------------------
-  
-  output$vifs <- renderPlot({
-    a <- myReg()
-    ids <- unlist(lapply(a$model, is.numeric)) 
-    z <- a$model[ , ids]
-    x <- z[,-1]
-    y <- z[,1]
-    b <- mc.plot(x, y)
   })
   
   ### Plots: ----------------------------------------------------------------

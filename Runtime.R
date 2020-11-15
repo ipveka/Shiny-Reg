@@ -1,7 +1,22 @@
 
-# Main:
+#### Runtime
 
 # Encoding: UTF-8
+
+library("shinydashboard") # Shiny dashboard
+library("shinycssloaders") # Animated CSS loader
+library("shinyalert") # Shiny Alerts
+library("shinyWidgets") # Shiny Widgets
+library("shinytest") # For testing 
+library("shinyjs") # JavaScript
+library("dplyr") # Dplyr
+library("markdown")
+library("lmtest")
+library("mctest")
+library("lm.beta")
+library("visreg")
+library("caret")
+library("DT")
 
 ### Funcions:
 
@@ -45,9 +60,5 @@ Sdbeta <- function(lm){
   return(beta)
 }
 
-### Crides
-
-llista <- c("RSQLite","shiny","shinydashboard","markdown",
-            "lmtest","lm.beta","mctest","visreg","caret","DT","RColorBrewer")
-Paquets(llista)
+#---
   
